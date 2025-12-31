@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { authAPI } from '../api';
-import { AuthContext } from './authContext';
 
 /**
  * 认证上下文
  * 管理用户登录状态
  */
+const AuthContext = createContext(null);
+
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(() => Boolean(localStorage.getItem('token')));
@@ -48,4 +49,12 @@ export const AuthProvider = ({ children }) => {
             {children}
         </AuthContext.Provider>
     );
+};
+
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within AuthProvider');
+    }
+    return context;
 };
