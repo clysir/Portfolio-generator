@@ -1,0 +1,39 @@
+# 依赖目录
+node_modules/
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 构建产物
+dist/
+build/
+
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+
+# 用户上传文件（可选择性保留）
+server/uploads/*
+!server/uploads/.gitkeep
+
+# 生成的网站
+server/generated/*
+!server/generated/.gitkeep
+
+# IDE 配置
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.temp

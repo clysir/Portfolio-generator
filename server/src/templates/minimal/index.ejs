@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="<%= portfolio.bio || user.username + '的个人作品集' %>">
+  <title><%= portfolio.title || user.username + '的作品集' %></title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="logo"><%= user.username %></a>
+      <ul class="nav-links">
+        <li><a href="#about">关于</a></li>
+        <li><a href="#works">作品</a></li>
+        <li><a href="#contact">联系</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 主页横幅 -->
+  <section class="hero">
+    <div class="hero-content">
+      <% if (user.avatar) { %>
+        <img src="<%= user.avatar %>" alt="头像" class="avatar">
+      <% } else { %>
+        <div class="avatar-placeholder"><%= user.username.charAt(0).toUpperCase() %></div>
+      <% } %>
+      <h1><%= portfolio.title || '欢迎来到我的作品集' %></h1>
+      <p class="hero-bio"><%= portfolio.bio || '这里展示我的创意作品和项目' %></p>
+      
+      <!-- 社交链接 -->
+      <% if (portfolio.socialLinks) { %>
+        <div class="social-links">
+          <% if (portfolio.socialLinks.github) { %>
+            <a href="<%= portfolio.socialLinks.github %>" target="_blank" class="social-link">GitHub</a>
+          <% } %>
+          <% if (portfolio.socialLinks.linkedin) { %>
+            <a href="<%= portfolio.socialLinks.linkedin %>" target="_blank" class="social-link">LinkedIn</a>
+          <% } %>
+          <% if (portfolio.socialLinks.email) { %>
+            <a href="mailto:<%= portfolio.socialLinks.email %>" class="social-link">Email</a>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+  </section>
+
+  <!-- 作品展示 -->
+  <section id="works" class="works-section">
+    <h2 class="section-title">我的作品</h2>
+    
+    <% if (works && works.length > 0) { %>
+      <div class="works-grid">
+        <% works.forEach(function(work) { %>
+          <article class="work-card">
+            <% if (work.coverImage) { %>
+              <div class="work-image">
+                <img src="<%= work.coverImage %>" alt="<%= work.title %>">
+              </div>
+            <% } else { %>
+              <div class="work-image placeholder">
+                <span><%= work.title.charAt(0) %></span>
+              </div>
+            <% } %>
+            <div class="work-content">
+              <span class="work-category"><%= work.category || '未分类' %></span>
+              <h3 class="work-title"><%= work.title %></h3>
+              <% if (work.description) { %>
+                <p class="work-description"><%= work.description %></p>
+              <% } %>
+              <% if (work.link) { %>
+                <a href="<%= work.link %>" target="_blank" class="work-link">查看详情 →</a>
+              <% } %>
+            </div>
+          </article>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p class="no-works">暂无作品展示</p>
+    <% } %>
+  </section>
+
+  <!-- 联系区域 -->
+  <section id="contact" class="contact-section">
+    <h2 class="section-title">联系我</h2>
+    <p>如果你对我的作品感兴趣，欢迎与我联系！</p>
+    <% if (portfolio.socialLinks && portfolio.socialLinks.email) { %>
+      <a href="mailto:<%= portfolio.socialLinks.email %>" class="contact-btn">发送邮件</a>
+    <% } %>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <p>&copy; <%= new Date().getFullYear() %> <%= user.username %>. All rights reserved.</p>
+    <p class="powered-by">Powered by Portfolio Generator</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
