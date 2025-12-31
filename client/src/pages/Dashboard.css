@@ -61,34 +61,36 @@
 
 /* 主内容区 */
 .dashboard-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
     width: 100%;
+    max-width: 100%;
+    padding: 2rem 4rem;
     box-sizing: border-box;
 }
 
 /* 快捷操作 */
 .quick-actions {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
     margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
 @media (max-width: 900px) {
-    .quick-actions {
-        grid-template-columns: repeat(2, 1fr);
+    .dashboard-main {
+        padding: 1.5rem 2rem;
     }
-}
 
-@media (max-width: 600px) {
-    .quick-actions {
-        grid-template-columns: 1fr;
+    .action-card {
+        flex: 1 1 100%;
+        max-width: 100%;
     }
 }
 
 .action-card {
+    flex: 1 1 300px;
+    max-width: 400px;
+    min-width: 280px;
     background: white;
     border-radius: 1rem;
     padding: 1.5rem;
